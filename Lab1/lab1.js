@@ -19,7 +19,7 @@ const questionTwo = function questionTwo(num) {
         if(!isNaN(num)){
             return questionTwo(num - 1) + questionTwo(num - 2);
         }else{
-            return console.log("Input error. Please input a number!");
+            return "Input error. Please input a number!";
         }
     }
 
@@ -27,20 +27,25 @@ const questionTwo = function questionTwo(num) {
 
 const questionThree = function questionThree(text) {
     // Implement question 3 here
-    //let vowels = ["a","e","i","o","u"];
-    var m = text.match(/[aeiou]/gi);
-    return m === null ? 0 : m.length;
+    if (typeof text === 'string' || text instanceof String){
+        var m = text.match(/[aeiou]/gi);
+        return m === null ? 0 : m.length;
+    }else{
+        return "Invalid type :: please enter a string!";
+    }
 }
 
 const questionFour = function questionFour(num) {
     // Implement question 4 here
     if(num === 0){
         return 1;
+    }else if(num < 0){
+        return NaN;
     }else{
         if(!isNaN(num)){
             return num * questionFour(num - 1);
         }else{
-            console.log("Input error. Please input a number!");
+            return "Input error. Please input a number!";
         }
     }
 }
