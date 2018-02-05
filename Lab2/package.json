@@ -4,7 +4,8 @@
   "description": "Lab2 for CS546",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Nicholas, Gattuso, 10412769",
   "license": "ISC"

@@ -1,8 +1,8 @@
 const volumeOfRectangularPrism = function volumeOfRectangularPrism(length, width, height) {
     // Implement question 1 here
     if(arguments.length===3){
-        if((typeof length === 'number' && isFinite(length)) || 
-            (typeof width === 'number' && isFinite(width)) ||
+        if((typeof length === 'number' && isFinite(length)) && 
+            (typeof width === 'number' && isFinite(width)) &&
             (typeof height === 'number' && isFinite(height))){
             if(length > 0 && width > 0 && height > 0){
                 return (length * width * height);
@@ -10,18 +10,18 @@ const volumeOfRectangularPrism = function volumeOfRectangularPrism(length, width
                 throw "One or more arguments is out of range! Please enter numbers above 0";
             }
         }else{
-            throw "One or more agruments is not a number";
+            throw "One or more arguments is not a number";
         }
     }else{
-        throw "Not enough arguments given!";
+        throw "Incorrect amount of arguments -- 3 argument of type int needed";
     }
 }
 
 const surfaceAreaOfRectangularPrism = function surfaceAreaOfRectangularPrism(length, width, height) { 
     // Implement question 2 here
     if(arguments.length===3){
-        if((typeof length === 'number' && isFinite(length)) || 
-            (typeof width === 'number' && isFinite(width)) ||
+        if((typeof length === 'number' && isFinite(length)) && 
+            (typeof width === 'number' && isFinite(width)) &&
             (typeof height === 'number' && isFinite(height))){
             if(length > 0 && width > 0 && height > 0){
                 return 2 * ((width * length) + (height * length) + (height * width));
@@ -29,10 +29,10 @@ const surfaceAreaOfRectangularPrism = function surfaceAreaOfRectangularPrism(len
                 throw "One or more arguments is out of range! Please enter numbers above 0";
             }
         }else{
-            throw "One or more agruments is not a number";
+            throw "One or more arguments is not a number";
         }
     }else{
-        throw "Not enough arguments given!";
+        throw "Incorrect amount of arguments -- 3 argument of type int needed";
     }
 
 }
@@ -47,10 +47,10 @@ const volumeOfSphere = function volumeOfSphere(radius) {
                 throw "One or more arguments is out of range! Please enter numbers above 0";
             }
         }else{
-            throw "One or more agruments is not a number";
+            throw "One or more arguments is not a number";
         }
     }else{
-        throw "Not enough arguments given!";
+        throw "Incorrect amount of arguments -- 1 argument of type int needed";
     }
     
 }
@@ -65,10 +65,10 @@ const surfaceAreaOfSphere = function surfaceAreaOfSphere(radius) {
                 throw "One or more arguments is out of range! Please enter numbers above 0";
             }
         }else{
-            throw "One or more agruments is not a number";
+            throw "One or more arguments is not a number";
         }
     }else{
-        throw "Not enough arguments given!";
+        throw "Incorrect amount of arguments -- 1 argument of type int needed";
     }
     
 }
