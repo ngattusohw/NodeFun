@@ -28,10 +28,23 @@
 
 // main();
 // 
-var fileData = require('./fileData.js');
-const file = './chapter1.txt';
+// var fileData = require('./fileData.js');
+// const file = './chapter1]0.txt';
 
-console.log("AKSDOPKASD");
+var shit = require('./textMetrics.js');
+console.log(shit.simplify("Helllo, my -! This is a great day to say helllo.\n\n\tHelllo! 2 3 4 23"));
+console.log(shit.createMetrics("Helllo, my -! This is a great day to say helllo.\n\n\tHelllo! 2 3 4 23"));
+// console.log("AKSDOPKASD");
 
 
-fileData.getFileAsString(file);
+// fileData.getFileAsString(file);
+
+
+// let text = "        Hello my name is bill123y \n bob and\t%saodd phil      and     ass      ";
+
+// let hello = text.toLowerCase().replace(/[^\w\s]/gi, '').replace(/[0-9]/g, '');
+// let shit = hello.replace(/\r?\n|\r|\r?\t|\r/g, ' ').replace(/ +(?= )/g,'').replace(/^\s+|\s+$/g, '');;
+
+// console.log(shit);
+
+
