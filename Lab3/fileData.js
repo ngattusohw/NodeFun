@@ -38,13 +38,11 @@ async function saveStringToFile(path,text) {
 }
 
 async function saveJSONToFile(path,obj) {
-    if(arguments.length!==2||typeof path!== 'string'||
-        (obj1 && typeof obj1 === 'object' && obj1.constructor === Object)){
+    if(arguments.length!==2|| typeof path!== 'string' &&
+        (obj && typeof obj === 'object' && obj.constructor === Object)){
         throw "saveStringToFile, error on the arguments";
     }else{
-
         var the_json = JSON.stringify(obj);
-
         await fs.writeFile(path,the_json,
             (err) => {
                 if(err) throw err;
