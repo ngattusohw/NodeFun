@@ -1,0 +1,15 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "code for lab4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nick gattuso, 10412769",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.0.2",
+    "uuid": "^3.2.1"
+  }
+}
