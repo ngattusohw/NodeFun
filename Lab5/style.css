@@ -1,0 +1,29 @@
+
+nav {
+	background-color:  grey;
+	height:  40px;
+}
+
+nav > ul {
+	display: flex;
+	justify-content: space-around;
+}
+
+.nav-item {
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 250px){
+	nav {
+		height: 90px;
+	}
+
+	nav > ul{
+		display: block;
+	}
+
+	.nav-item{
+		text-decoration-color: blue;
+	}
+
+}
