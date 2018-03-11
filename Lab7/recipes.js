@@ -32,6 +32,16 @@ const createRecipe = async function createTask(id, title, ingredients, steps){
 const getAllRecipes = async function() { 
     const recipeCollection = await recipeCollect();
     const recipes = await recipeCollection.find({}).toArray();
+    if(recipes){
+        var the_array = [];
+        for (var i = 0; i < recipes.length; i++) {
+            var the_obj = {};
+            the_obj._id = recipes[i]._id;
+            the_obj.title = recipes[i].title;
+            the_array.push(the_obj);
+        }
+        return the_array;
+    }
     return recipes;
 }
 

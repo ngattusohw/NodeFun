@@ -23,16 +23,6 @@ var listener = app.listen(3000,function(){
             console.log("Error: " + e );
             res.status(500).send(JSON.stringify({ error: e }));
         }
-
-        // res.end(JSON.stringify({
-        //     "name": "Nicholas Gattuso",
-        //     "cwid": "10412769",
-        //     "biography": "I am a passionate entrpenur (how do you spell that!) and programmer.\n" +
-        //                 "I am devoted to using my skills as a programmer to help others by innovating software.\n" +
-        //                 "I also really love playing the drums \n",
-        //     "favoriteShows": ["The sopranos", "breaking bad", "The walking Dead", "The office"],
-        //     "hobbies": ["Innovating", "programming", "video games"]
-        // }));
         
     });
 
@@ -49,11 +39,6 @@ var listener = app.listen(3000,function(){
             res.status(404).send(JSON.stringify({ error: e }));
         }
 
-        // res.end(JSON.stringify({
-        //     "storyTitle": "This one time, at band camp.",
-        //     "story": "I love to play drums. But I also loved playing soccer. This is why, when I was pulled off of freshman soccer try-outs to go to the first day of percussion camp at the Point Pleasant Borough High School's marching band, I was extremely conflicted. When I got there, at the time I was positive that I was making the correct choice of dropping my 9 year passion of soccer, for my other, equally as loved passion of drumming. However, as time went on, that desicion became one to haunt me for the rest of my high school career. Dun dun dun!"
-        // }));
-
     });
 
     app.post('/recipes', jsonParser , async function(req, res) {
@@ -61,7 +46,6 @@ var listener = app.listen(3000,function(){
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
         res.header("Access-Control-Allow-Origin", "*");
 
-        // console.log(req.body);
         try{
             var return_recipe = await recipeModule.createRecipe(req.body._id,req.body.title,
                                                                 req.body.ingredients,req.body.steps);
@@ -70,9 +54,6 @@ var listener = app.listen(3000,function(){
             res.status(500).send(JSON.stringify({ error: e }));
         }
         
-        
-        // res.end(JSON.stringify(
-        // ));
     });
 
     app.put('/recipes/:id', jsonParser, async function(req, res) {
@@ -95,9 +76,6 @@ var listener = app.listen(3000,function(){
             res.status(500).json({ error: e });
         }
 
-
-        // res.end(JSON.stringify(
-        // ));
     });
 
     app.patch('/recipes/:id', jsonParser, async function(req, res) {
@@ -109,7 +87,7 @@ var listener = app.listen(3000,function(){
         try {
             await recipeModule.getRecipe(req.params.id);
         } catch (e) {
-            res.status(404).json({ error: "Recipe not found!" });
+            res.status(404).json({ error: "Recipe not found! Can not update" });
         }
 
         try {
@@ -119,21 +97,16 @@ var listener = app.listen(3000,function(){
             res.status(500).json({ error: e });
         }
 
-
-        // res.end(JSON.stringify(
-        // ));
     });
 
     app.delete('/recipes/:id', async function(req, res) {
         res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
         res.header("Access-Control-Allow-Origin", "*");
-        // res.end(JSON.stringify(
-        // ));
         
         try{
             var didDelete = await recipeModule.removeRecipe(req.params.id);
-            res.status(200).send(JSON.stringify({success: didDelete}));
+            res.status(200).end();
         }catch(e){
             res.status(500).send(JSON.stringify({ error: e }));
         }
