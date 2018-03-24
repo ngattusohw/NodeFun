@@ -1,0 +1,17 @@
+<section>
+  <h1>{{title}}</h1>
+  <p> This website takes a simple string input (of a super long sentance, or just a basic word), and checks to see if it is a palidrome! Now what is a palidrome you might ask? Well, it was said best by the spec of this assignment! A palindrome is a phrase that is spelled the same way, backwards and forwards (ignoring spacing and punctuation; only alphanumeric characters matter). So, for example, "Madam" is a palidrome, but sadly, "pizza", is not :( </p>
+    <article class="post">
+    	<form action="/result" method="POST">
+		    <label for="palidrome_input">Enter your (proposed) palidrome!</label>
+  			<input type="text" name="text-to-test" id="palidrome_input"><br>
+			<input type="submit" value="Submit">
+		</form>
+    </article>
+</section>
+
+
+
+Also inside the main element, you will have a form; this form will POST to /result. This form will have an input and a label; the label should properly reference the same idas the input. You should also have a button with a type of submit that submits the form. The input in your form should have a name of text-to-test. When your POST this string to /result, it will be checked to see if it is a palindrome or not.
+
+

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Nick Gattuso",
+  "author": "Nick Gattuso 10412769",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2"
