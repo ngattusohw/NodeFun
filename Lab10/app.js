@@ -5,10 +5,16 @@ I pledge my honor that I have abided by the stevens honor system
 const express = require("express");
 const exphbs = require("express-handlebars");
 const cookieParser = require('cookie-parser');
+const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+
 const users = require('./utils/users.js');
+
 
 const app = express();
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 // app.use("/", static);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -24,16 +30,45 @@ app.get('/', function(req, res) {
 			{
 				"title": "Login!"
 			}
-		)
+		);
 	}
     //res.render("palidrome/index", {title: "The Best Palindrome Checker in the World!"});
 });
 
-app.post('/login', function(req, res){
-	// if(req.body["text-to-test"]){
-	// 	var the_text = req.body["text-to-test"].toLowerCase().replace(/[.,\/#!\'\`\’$%\^&\*;?:{}=\-_`~()]/g,"").replace(/\s+/g, '').replace("\'", "");
-	// 	var isBool = palidrome.isPalindrome(the_text);
+app.post('/login', async function(req, res){
+	console.log("SUCK MY ASSHOLE")
+	if(req.body.username && req.body.password){
+		console.log(req.body.username);
+		var isEqual = false;
+		for (var i = 0; i < users.length; i++) {
+			console.log(users[i]);
+			if(users[i].username === req.body.username){
+				try{
+					isEqual = await bcrypt.compare(req.body.password, users[i].hashedPassword);
+					if(isEqual === true){
+						break;
+					}
+				}catch(e){
+					isEqual = false;
+					console.log(e);
+				}
+			}else{
+				isEqual = false;
+			}
+		}
 
+		if(isEqual === true){
+			console.log("Good job!");
+		}else{
+			res.render("login",
+				{
+					"title": "Login!",
+					"error": "Invalid Credentials! Please try again."
+				}
+			);
+		}
+
+	}
 	// 	if(isBool){
 	// 		//render success
 	// 		res.render("palidrome/result", 
