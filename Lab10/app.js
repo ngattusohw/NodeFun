@@ -4,14 +4,28 @@ I pledge my honor that I have abided by the stevens honor system
  */
 const express = require("express");
 const exphbs = require("express-handlebars");
+const cookieParser = require('cookie-parser');
+const users = require('./utils/users.js');
 
 const app = express();
+app.use(cookieParser());
 // app.use("/", static);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.get('/', function(req, res) {
+	if(req.cookies.AuthCookie){
+		//they are authenticated, redirect to /private!
+		res.redirect("/private");
+	}else{
+		//they are not authenticated
+		res.render("login",
+			{
+				"title": "Login!"
+			}
+		)
+	}
     //res.render("palidrome/index", {title: "The Best Palindrome Checker in the World!"});
 });
 
