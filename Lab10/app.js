@@ -9,16 +9,15 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 var path = require('path');
 
-
 const users = require('./utils/users.js');
 
-
 const app = express();
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use("/", express.static(path.join(__dirname + '/css')));
-// app.use("/", static);
+app.use("/", express.static(path.join(__dirname + '/js')));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -39,13 +38,16 @@ app.get('/', function(req, res) {
 });
 
 app.post('/login', async function(req, res){
-	console.log("SUCK MY ASSHOLE")
 	if(req.body.username && req.body.password){
 		console.log(req.body.username);
 		var isEqual = false;
 		for (var i = 0; i < users.length; i++) {
 			if(users[i].username === req.body.username){
 				try{
+					console.log("Req password " + req.body.password);
+					console.log("Hashed Password " + users[i].hashedPassword);
+					console.dir(users);
+					console.log(users[i]);
 					isEqual = await bcrypt.compare(req.body.password, users[i].hashedPassword);
 					if(isEqual === true){
 						break;
@@ -100,8 +102,14 @@ app.get('/private', async function(req, res) {
 		for (var i = 0; i < users.length; i++) {
 			try{
 				compareCookie = await bcrypt.compare(users[i].username, req.cookies.AuthCookie);
-				theUser = compareCookie ? users[i] : {};
 				if(compareCookie === true){
+					//THIS IS AWFUL 0/10 SHOULD DO DYNAMICALLY BUT TOO LAZY
+					theUser._id = users[i]._id;
+					theUser.username = users[i].username;
+					theUser.firstName = users[i].firstName;
+					theUser.lastName = users[i].lastName;
+					theUser.Profession = users[i].Profession;
+					theUser.Bio = users[i].Bio;
 					break;
 				}
 			}catch(e){
@@ -109,10 +117,8 @@ app.get('/private', async function(req, res) {
 				break;
 			}
 		}
-		console.log("WHATS UP FUCKERS");
-		console.log(theUser);
-		delete theUser.hashedPassword;
 		res.status(200).json(theUser);
+		//TODO FIX THIS, ADD HANDLING FOR CASE FOR RANDOM COOKIE
     }else{
     	res.status(403).render("login",
     		{
@@ -125,6 +131,13 @@ app.get('/private', async function(req, res) {
 
 app.get('/logout', function(req, res) {
     //res.render("palidrome/index", {title: "The Best Palindrome Checker in the World!"});
+    res.clearCookie('AuthCookie');
+    //res.set('Set-Cookie', 'AuthCookie=nothing', {expires: new Date(0)});
+    res.redirect("/");
+});
+
+app.get("*", function(req,res){
+	res.status(404).json("Error! Not implemented!");
 });
 
 app.listen(3000, () => {
