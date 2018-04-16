@@ -132,8 +132,12 @@ app.get('/private', async function(req, res) {
 app.get('/logout', function(req, res) {
     //res.render("palidrome/index", {title: "The Best Palindrome Checker in the World!"});
     res.clearCookie('AuthCookie');
-    //res.set('Set-Cookie', 'AuthCookie=nothing', {expires: new Date(0)});
-    res.redirect("/");
+    res.render("login",
+    	{
+    		"title": "Login!",
+    		"error": "You have been logged out!"	
+    	}
+    );
 });
 
 app.get("*", function(req,res){
